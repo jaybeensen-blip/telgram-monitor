@@ -1,16 +1,15 @@
-name: Telegram Monitor
+name: Run Monitor
 on:
-schedule:
-- cron: '0 0 * * *'
-workflow_dispatch:
+ schedule:
+  - cron: '0 * * * *'
+ workflow_dispatch:
 jobs:
-run-script:
-runs-on: ubuntu-latest
-steps:
- - name: Checkout code
- - uses: actions/checkout@v3
- - name: Run script
-env:
-TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
-run: python monitor.py
+ run:
+  runs-on: ubuntu-latest
+  steps:
+   - uses: actions/checkout@v4
+   - name: Execute
+    env:
+     TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+     TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+    run: python3 monitor.py
